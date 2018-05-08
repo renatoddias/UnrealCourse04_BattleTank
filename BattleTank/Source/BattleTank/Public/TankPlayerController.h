@@ -16,6 +16,8 @@ public:
 
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
+
+	bool GetLookVectorHitLocation(FVector LookDirection, FVector& HitLocation) const;
 	
 private:	
 	ATank* GetControlledTank() const;
@@ -34,5 +36,6 @@ private:
 	UPROPERTY(EditAnywhere)
 	float CrosshairYLocation = 0.3333;
 
-
+	UPROPERTY(EditAnywhere)
+	float LineTraceRange = 1000000;
 };
