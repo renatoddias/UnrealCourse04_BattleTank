@@ -15,11 +15,6 @@ ATank::ATank()
 	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
 }
 
-void ATank::AimAt(FVector HitLocation)
-{
-	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
-}
-
 void ATank::SetBarrelReference(UTankBarrel * BarrelToSet)
 {
 	TankAimingComponent->SetBarrelReference(BarrelToSet);
@@ -36,10 +31,19 @@ void ATank::BeginPlay()
 	Super::BeginPlay();	
 }
 
-
 // Called to bind functionality to input
 void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
 
+void ATank::AimAt(FVector HitLocation)
+{
+	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
+}
+
+void ATank::Fire()
+{
+	auto Time = GetWorld()->GetTimeSeconds();
+	UE_LOG(LogTemp, Warning, TEXT("Fires at %f"), Time);
+}
