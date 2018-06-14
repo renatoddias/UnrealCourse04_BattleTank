@@ -34,4 +34,3 @@ void AProjectile::LaunchProjectile(float Speed)
 	ProjectileMovement->SetVelocityInLocalSpace(FVector::ForwardVector * Speed);
 	ProjectileMovement->Activate();
 }
-
