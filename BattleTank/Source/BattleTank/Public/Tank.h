@@ -10,6 +10,7 @@
 class UTankBarrel;
 class UTankTurret;
 class UTankAimingComponent;
+class UTankMovementComponent;
 class AProjectile;
 
 UCLASS()
@@ -38,6 +39,9 @@ protected:
 
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
+	UPROPERTY(BlueprintReadOnly)
+	UTankMovementComponent* TankMovementComponent = nullptr;
+
 private:	
 
 	// Called to bind functionality to input
@@ -53,9 +57,6 @@ private:
 	TSubclassOf<AProjectile> ProjectileBlueprint;
 
 	UTankBarrel* Barrel = nullptr;
-
-
-
-	double LastFireTime = 0;
 	
+	double LastFireTime = 0;
 };
