@@ -40,6 +40,7 @@ protected:
 	UPROPERTY(VisibleDefaultsOnly)
 	UStaticMeshComponent* TankBody;
 
+	UPROPERTY(BlueprintReadOnly)
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
 	UPROPERTY(BlueprintReadOnly)
