@@ -17,34 +17,11 @@ ATank::ATank()
 	// No need to protect pointers as added at construction
 	TankBody = CreateDefaultSubobject<UStaticMeshComponent>(FName("Tank Body"));
 	RootComponent = TankBody;
-	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
-}
-
-void ATank::SetBarrelReference(UTankBarrel * BarrelToSet)
-{
-	TankAimingComponent->SetBarrelReference(BarrelToSet);
-	Barrel = BarrelToSet;
-}
-
-void ATank::SetTurretReference(UTankTurret * TurretToSet)
-{
-	TankAimingComponent->SetTurretReference(TurretToSet);
-}
-
-// Called when the game starts or when spawned
-void ATank::BeginPlay()
-{
-	Super::BeginPlay();	
-}
-
-// Called to bind functionality to input
-void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
 
 void ATank::AimAt(FVector HitLocation)
 {
+	if (!TankAimingComponent) return;
 	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
 }
 
@@ -52,12 +29,12 @@ void ATank::Fire()
 {
 	if (!ProjectileBlueprint) return;
 	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
-	if (Barrel && isReloaded)
+	if (BarrelT && isReloaded)
 	{
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(
 			ProjectileBlueprint,
-			Barrel->GetSocketLocation(FName("Projectile")),
-			Barrel->GetSocketRotation(FName("Projectile"))
+			BarrelT->GetSocketLocation(FName("Projectile")),
+			BarrelT->GetSocketRotation(FName("Projectile"))
 			);
 
 		Projectile->LaunchProjectile(LaunchSpeed);
