@@ -29,12 +29,16 @@ public:
 	void Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
 
 	UFUNCTION(BlueprintCallable, Category = "Firing")
-	void AimAt(FVector HitLocation, float LaunchSpeed);
+	void AimAt(FVector HitLocation);
+
+	// Temporary?
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	float LaunchSpeed = 4000; 
 
 protected:
-	UPROPERTY(BlueprintReadOnly, Category = "State")
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "State")
 	EFiringState FiringState = EFiringState::Aiming;
-
+	
 private:
 	// Sets default values for this component's properties
 	UTankAimingComponent();

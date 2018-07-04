@@ -8,8 +8,6 @@
 
 // Forward Declarations
 class UTankBarrel;
-class UTankTurret;
-class UTankAimingComponent;
 class UTankMovementComponent;
 class AProjectile;
 
@@ -21,11 +19,7 @@ class BATTLETANK_API ATank : public APawn
 public:
 	// Sets default values for this pawn's properties
 	ATank();
-
-
-	UFUNCTION(BlueprintCallable, Category = "Firing")
-	void AimAt(FVector HitLocation);
-
+	
 	UFUNCTION(BlueprintCallable, Category = "Firing")
 	void Fire();
 
@@ -34,16 +28,10 @@ protected:
 	UPROPERTY(VisibleDefaultsOnly)
 	UStaticMeshComponent* TankBody;
 
-	UPROPERTY(BlueprintReadWrite, Category = "Setup")
-	UTankAimingComponent* TankAimingComponent = nullptr;
-
-	UPROPERTY(BlueprintReadWrite, Category = "Setup")
-	UTankBarrel* BarrelT = nullptr;
-
 private:	
 
-	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-	float LaunchSpeed = 4000;
+	//UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	//float LaunchSpeed = 4000;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float ReloadTimeInSeconds = 3;

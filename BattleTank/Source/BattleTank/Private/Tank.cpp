@@ -3,7 +3,6 @@
 #include "Tank.h"
 #include "TankBarrel.h"
 #include "TankAimingComponent.h"
-#include "TankMovementComponent.h"
 #include "Projectile.h"
 #include "Engine/World.h"
 
@@ -19,25 +18,20 @@ ATank::ATank()
 	RootComponent = TankBody;
 }
 
-void ATank::AimAt(FVector HitLocation)
-{
-	if (!TankAimingComponent) return;
-	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
-}
-
 void ATank::Fire()
 {
 	if (!ProjectileBlueprint) return;
 	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
-	if (BarrelT && isReloaded)
+	auto Barrel = this->FindComponentByClass<UTankBarrel>();
+	if (Barrel && isReloaded)
 	{
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(
 			ProjectileBlueprint,
-			BarrelT->GetSocketLocation(FName("Projectile")),
-			BarrelT->GetSocketRotation(FName("Projectile"))
+			Barrel->GetSocketLocation(FName("Projectile")),
+			Barrel->GetSocketRotation(FName("Projectile"))
 			);
 
-		Projectile->LaunchProjectile(LaunchSpeed);
+		Projectile->LaunchProjectile(this->FindComponentByClass<UTankAimingComponent>()->LaunchSpeed);
 		LastFireTime = FPlatformTime::Seconds();
 	}
 }
