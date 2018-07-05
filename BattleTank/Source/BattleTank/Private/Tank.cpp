@@ -20,10 +20,12 @@ ATank::ATank()
 
 void ATank::Fire()
 {
-	if (!ProjectileBlueprint) return;
-	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
+	if (!ensure(ProjectileBlueprint)) return;
 	auto Barrel = this->FindComponentByClass<UTankBarrel>();
-	if (Barrel && isReloaded)
+	if (!ensure(Barrel)) return;
+
+	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
+	if (isReloaded)
 	{
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(
 			ProjectileBlueprint,
