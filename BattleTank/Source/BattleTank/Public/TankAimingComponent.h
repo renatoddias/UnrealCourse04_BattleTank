@@ -31,9 +31,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Firing")
 	void AimAt(FVector HitLocation);
 
-	// Temporary?
+	// TODO move to private
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-	float LaunchSpeed = 4000; 
+	float LaunchSpeed = 4000;
 
 protected:
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "State")

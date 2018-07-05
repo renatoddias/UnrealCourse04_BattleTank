@@ -6,8 +6,6 @@
 #include "AIController.h"
 #include "TankAIController.generated.h"
 
-class ATank;
-
 /**
  * 
  */
@@ -22,5 +20,4 @@ private:
 
 	UPROPERTY(EditDefaultsOnly)
 	float AcceptanceRadius = 300;
-
 };
