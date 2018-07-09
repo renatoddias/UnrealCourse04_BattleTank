@@ -51,6 +51,10 @@ private:
 
 	void MoveBarrelAndTurret(FVector AimDirection);
 
+	bool IsBarrelMoving();
+
+	FVector AimDirection;
+
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	TSubclassOf<AProjectile> ProjectileBlueprint;
 
