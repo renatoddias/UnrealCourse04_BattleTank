@@ -87,8 +87,15 @@ void UTankAimingComponent::MoveBarrelAndTurret(FVector AimDirection)
 	auto BarrelDeltaRotator = AimAsRotator - BarrelRotator;
 	auto TurretDeltaRotator = AimAsRotator - TurretRotator;
 
-	Barrel->Elevate(BarrelDeltaRotator.Pitch);
-	Turret->Rotate(TurretDeltaRotator.Yaw);
+	auto TankRoll = GetOwner()->GetRootComponent()->GetComponentRotation().Roll;
+	if (FMath::Abs(TankRoll) > 90)
+	{
+		BarrelDeltaRotator.Pitch = -BarrelDeltaRotator.Pitch;
+		TurretDeltaRotator.Yaw = -TurretDeltaRotator.Yaw;
+	}
+
+	Barrel->Elevate(BarrelDeltaRotator.GetNormalized().Pitch);
+	Turret->Rotate(TurretDeltaRotator.GetNormalized().Yaw);
 }
 
 bool UTankAimingComponent::IsBarrelMoving()
