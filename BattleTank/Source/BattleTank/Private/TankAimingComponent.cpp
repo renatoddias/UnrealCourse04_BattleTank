@@ -116,6 +116,7 @@ void UTankAimingComponent::Fire()
 {
 	if (!ensure(ProjectileBlueprint)) return;
 	if (!ensure(Barrel)) return;
+	if (CanFire == false) return;
 
 	if (FiringState == EFiringState::Locked || FiringState == EFiringState::Aiming)
 	{
