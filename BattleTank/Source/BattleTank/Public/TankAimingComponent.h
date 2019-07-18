@@ -41,6 +41,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Firing")
 	int32 GetRoundsLeft() const;
 
+	UPROPERTY(BlueprintReadWrite, Category = "Firing")
+	bool CanFire = true;
+
 private:
 	// Sets default values for this component's properties
 	UTankAimingComponent();
@@ -60,9 +63,6 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	TSubclassOf<AProjectile> ProjectileBlueprint;
-
-	UPROPERTY(EditAnywhere, Category = "Firing")
-	bool CanFire = true;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float LaunchSpeed = 4000;
