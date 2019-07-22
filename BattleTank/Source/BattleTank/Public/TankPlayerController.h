@@ -19,16 +19,17 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	bool GetLookVectorHitLocation(FVector LookDirection, FVector& HitLocation) const;
-	
+
 protected:
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
 	void FoundAimingComponent(UTankAimingComponent* AimCompRef);
 
-
 private:	
 	// Start the tank moving the barrel so that a shot would hit where the crosshair intersects the world
 	void AimTowardsCrosshair();
+
+	virtual void SetPawn(APawn* InPawn) override;
 
 	// Return an OUT parameter, true if hit landscape
 	bool GetSightRayHitLocation(FVector& OutHitLocation) const;
@@ -43,4 +44,8 @@ private:
 
 	UPROPERTY(EditDefaultsOnly)
 	float LineTraceRange = 1000000;
+
+	UFUNCTION()
+	void OnPlayerDeath();
+
 };
